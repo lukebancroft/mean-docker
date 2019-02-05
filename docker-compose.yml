@@ -1,0 +1,19 @@
+version: '2' # specify docker-compose version
+
+services:
+  angular: # nom de l'application
+    build: angular-client # répertoire du Dockerfile
+    ports:
+      - "5555:5555" # Ports à utiliser
+
+  express: # nom du serveur
+    build: express-server # répertoire du Dockerfile
+    ports:
+      - "3000:3000" # ports à utiliser
+    links:
+      - database # lier ce service au service de base de données
+
+  database: # nom de la base de données
+    image: mongo # specify image to build container from
+    ports:
+      - "27017:27017" # specify port forewarding
